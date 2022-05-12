@@ -1,8 +1,11 @@
-﻿namespace EShopAPİ.Domain.Entities.Comon
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EShopAPİ.Domain.Entities.Comon
 {
     public class BaseEntity
     {
-        public Guid İd { get; set; }
+        [Key]
+        public Guid İD { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

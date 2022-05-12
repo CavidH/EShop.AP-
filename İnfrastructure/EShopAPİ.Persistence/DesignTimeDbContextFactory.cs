@@ -10,7 +10,7 @@ namespace EShopAPİ.Persistence
         {
             DbContextOptionsBuilder<EShopDbContext> dbContextOptionsBuilder = new();
             dbContextOptionsBuilder
-                .UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=EShopApiDbv1;Trusted_Connection=True;");
+                .UseSqlServer(Configurations.GetConnectionString());
             return new(dbContextOptionsBuilder.Options);
         }
     }

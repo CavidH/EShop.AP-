@@ -8,7 +8,8 @@ namespace EShopAPİ.Persistence
     { 
         public static void AddPersistenceServices(this IServiceCollection services)
         {
-            services.AddDbContext<EShopDbContext>(options => options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=EShopApiDbv1;Trusted_Connection=True;"));
+            services.AddDbContext<EShopDbContext>(options => options
+                .UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=EShopApiDbv1;Trusted_Connection=True;"));
         }
     }
 }

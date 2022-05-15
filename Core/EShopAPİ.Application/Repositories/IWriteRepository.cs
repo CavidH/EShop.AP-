@@ -1,9 +1,14 @@
-﻿namespace EShopAPİ.Application.Repositories;
+﻿using EShopAPİ.Domain.Entities.Comon;
 
-public interface IWriteRepository<T> : IRepository<T> where T : class
+namespace EShopAPİ.Application.Repositories;
+
+public interface IWriteRepository<T> : IRepository<T> where T : BaseEntity
 {
     Task<bool> AddAsync(T model);
-    Task<bool> AddAsync(List<T> model);
-    Task<bool> Remove(string id);
-    Task<bool> UpdateAsync(T model);
+    Task<bool> AddRangeAsync(List<T> datas);
+    bool Remove(T model);
+    bool Remove(List<T> datas);
+    Task<bool> RemoveAsync(string Id);
+    bool Update(T model);
+    Task SaveAsync();
 }

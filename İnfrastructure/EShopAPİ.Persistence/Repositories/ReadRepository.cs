@@ -1,11 +1,12 @@
 ﻿using System.Linq.Expressions;
 using EShopAPİ.Application.Repositories;
+using EShopAPİ.Domain.Entities.Comon;
 using EShopAPİ.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace EShopAPİ.Persistence.Repositories;
 
-public class ReadRepository<T> : IReadRepository<T> where T : class
+public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
 
 {
     private readonly EShopDbContext _context;
@@ -14,17 +15,11 @@ public class ReadRepository<T> : IReadRepository<T> where T : class
     public IQueryable<T> GetAll() => Table;
 
     public IQueryable<T> GetWhere(Expression<Func<T, bool>> expression)
-    {
-        throw new NotImplementedException();
-    }
+        => Table.Where(expression);
 
-    public Task<T> GetSingleAsync(Expression<Func<T, bool>> expression)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<T> GetSingleAsync(Expression<Func<T, bool>> expression)
+        => await Table.FirstOrDefaultAsync(expression);
 
-    public Task<T> GetByIdAsync(string id)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<T> GetByIdAsync(string id)
+        => await Table.FirstOrDefaultAsync(p => p.İD == Guid.Parse(id));
 }

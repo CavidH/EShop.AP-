@@ -1,8 +1,8 @@
-﻿using EShopAPİ.Persistence.Contexts;
+﻿using EShopAPİ.Application.Repositories;
+using EShopAPİ.Persistence.Contexts;
+using EShopAPİ.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Protocols;
 
 namespace EShopAPİ.Persistence
 {
@@ -12,6 +12,14 @@ namespace EShopAPİ.Persistence
         {
             services.AddDbContext<EShopDbContext>(options => options
                 .UseSqlServer(Configurations.GetConnectionString()));
+            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+
+            services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+            services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
+            services.AddScoped<IProductrWriteRepository, ProductWriteRepository>();
         }
     }
 }

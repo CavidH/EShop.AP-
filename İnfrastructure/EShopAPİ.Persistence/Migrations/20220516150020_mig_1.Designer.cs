@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShopAPİ.Persistence.Migrations
 {
     [DbContext(typeof(EShopDbContext))]
-    [Migration("20220514073250_mg1")]
-    partial class mg1
+    [Migration("20220516150020_mig_1")]
+    partial class mig_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,9 @@ namespace EShopAPİ.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("UpdatedDates")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("İD");
 
                     b.ToTable("Customers");
@@ -55,19 +58,19 @@ namespace EShopAPİ.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("CustomerİD")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("UpdatedDates")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("İD");
 
-                    b.HasIndex("CustomerİD");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -85,11 +88,14 @@ namespace EShopAPİ.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDates")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("İD");
 
@@ -115,7 +121,7 @@ namespace EShopAPİ.Persistence.Migrations
                 {
                     b.HasOne("EShopAPİ.Domain.Entities.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerİD")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

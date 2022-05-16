@@ -35,6 +35,9 @@ namespace EShopAPİ.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("UpdatedDates")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("İD");
 
                     b.ToTable("Customers");
@@ -53,19 +56,19 @@ namespace EShopAPİ.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("CustomerİD")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("UpdatedDates")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("İD");
 
-                    b.HasIndex("CustomerİD");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -83,11 +86,14 @@ namespace EShopAPİ.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDates")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("İD");
 
@@ -113,7 +119,7 @@ namespace EShopAPİ.Persistence.Migrations
                 {
                     b.HasOne("EShopAPİ.Domain.Entities.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerİD")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
